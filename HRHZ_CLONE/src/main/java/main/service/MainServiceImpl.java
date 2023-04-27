@@ -23,6 +23,7 @@ import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,17 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<Map<String, Object>> getBestProductList() throws Exception {
 		return mainDAO.getBestProductList();
+	}
+
+	@Override
+	public List<Map<String, Object>> getTop100Product() throws Exception {
+		return mainDAO.getTop100Product();
+	}
+
+	@Override
+	public void likeCount(HashMap<String, String> dataMap) throws Exception {
+		mainDAO.likeCount(dataMap);
+		
 	}
     
 

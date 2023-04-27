@@ -1,5 +1,6 @@
 package main.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,26 @@ public class MainDAOMyBatis implements MainDAO{
 	@Override
 	public List<Map<String, Object>> getBestProductList() throws Exception {
 		return sqlSession.selectList("mainSQL.getBestProductList");
+	}
+
+	@Override
+	public List<Map<String, Object>> getTop100Product() throws Exception {
+		return sqlSession.selectList("mainSQL.getTop100Product");
+	}
+
+
+	@Override
+	public void likeCount(HashMap<String, String> dataMap) throws Exception {
+		
+		System.out.println(dataMap);
+		if (dataMap.get("division").equals("I")) {
+			sqlSession.insert("mainSQL.likeInsert", dataMap);
+		} else {
+			sqlSession.delete("mainSQL.likeDelete", dataMap);
+		}
+		
+		sqlSession.update("mainSQL.likeCount", dataMap);
+		
 	}
 
 }
