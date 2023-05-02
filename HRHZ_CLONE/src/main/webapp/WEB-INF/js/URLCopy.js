@@ -1,12 +1,15 @@
 $(function () {
      $(".productShareImg").on("click", function (event) {
-         $("section.sectionBackGround").css("display", "flex");
+         $(".modalBackGround").css("display", "flex");
+        
+         
          urlClip();
 
      });
       
      $(".modalCloseBtn, .confirmBtn").on("click", function (event) {
-        $("section.sectionBackGround").css("display", "none");
+        $(".modalBackGround").css("display", "none");
+        
      });
      
     function urlClip(){

@@ -1,70 +1,9 @@
-* {
-    font-family: "Noto Sans KR", sans-serif;
-}
-
-header {
-    position: sticky;
-    top: 0px;
-    left: 0px;
-    z-index: 90;
-    width: 100%;
-    height: 80px;
-    min-width: 1024px;
-    box-shadow: rgb(237, 237, 237) 0px 1px 0px 0px;
-    background-color: rgb(255, 255, 255);
-}
-
-body {
+main {
     margin: 0 auto;
     line-height: 1.15;
-    
+    min-width: 1024px;
 }
 
-div {
-    display: block;
-}
-
-img {
-    overflow-clip-margin: content-box;
-    overflow: clip;
-}
-
-ul, li, p, button {
-    padding: 0px;
-}
-
-ul {
-    margin: 0px;
-    list-style: none;
-}
-
-ul, li, p, button {
-    padding: 0px;
-}
-
-table {
-    border-collapse: separate;
-    text-indent: initial;
-    border-spacing: 2px;
-}
-
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-
-.headerWrap {
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding: 20px 70px;
-}
-
-.amondzLogo {
-    width: 134px;
-    margin-right: 80px;
-}
 .mainMenu {
     display: flex;
     gap: 40px;
@@ -191,32 +130,17 @@ tbody {
 }
 
 /* main */
-main {
-    max-width: 1024px;
-    min-width: 1024px;
-    max-height: 2000px;
-    min-height: 2000px;
-    padding: 0 30px;
-    margin: 0 auto;
-    display: flex;
-}
-
-.mainSection {
-    padding: 0 60px;
-    width: 80%;
-    height: 1000px;
-    position: relative;
+.paymentMain1 {
+    background-color: rgb(250, 250, 250);
 }
 
 .paymentMain1 {
     display: flex;
     flex-direction: column;
-    -webkit-box-align: center;
     align-items: center;
     max-width: 1200px;
     min-height: calc(100vh - 73px);
     margin: 0px auto;
-    padding-top: 40px;
     padding-bottom: 118px;
     font-family: NotoSansCJKkr;
     color: rgb(0, 0, 0);
@@ -232,10 +156,6 @@ main {
     height: 59px;
     margin-bottom: 40px;
     font-family: Barlow;
-}
-
-.payProductInfo {
-    line-height: 56px;
 }
 
 .title {
@@ -257,12 +177,19 @@ form {
     border-collapse: collapse;
     font-family: Barlow;
 }
+.payProductTable:not(:last-child) {
+    margin-bottom: 56px;
+}
 
-
+/* thead */
 thead {
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
+}
+
+.payProductTable thead tr {
+    height: 54px;
 }
 
 thead tr:first-child {
@@ -305,6 +232,8 @@ thead tr:last-child {
     border-bottom: 1px solid rgb(237, 237, 237);
 }
 
+/*----------------*/
+/* tbody */
 tbody tr td {
     text-align: center;
     padding: 24px 0px;
@@ -313,11 +242,14 @@ tbody tr td {
 tbody tr td.productInfoBox {
     text-align: left;
 }
-
-tbody tr:last-child div.productInfoImgBox {
+.productInfoBox .productInfoImgBox {
+    display: inline-block;
     margin-right: 16px;
-    float: left;
     vertical-align: top;
+    line-height: 0;
+    width: 100px;
+    height: 100px;
+    float: left;
 }
 
 .productImg {
@@ -327,9 +259,9 @@ tbody tr:last-child div.productInfoImgBox {
     height: initial;
     background: none;
     opacity: 1;
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
+    border: 0;
+    margin: 0;
+    padding: 0;
     max-width: 100%;
 }
 
@@ -349,17 +281,18 @@ span.productImg img {
     border-radius: 2px;
 }
 
+.payProductTable tbody tr {
+    border-top: 1px solid rgb(237, 237, 237);
+}
 
 tbody tr:last-child {
     border-bottom: 1px solid rgb(237, 237, 237);
 }
 
-
 div.productInfo {
     display: inline-block;
     vertical-align: top;
     width: calc(100% - 116px);
-    
 }
 
 div.productName {
@@ -385,7 +318,6 @@ div.productCountAndPrice {
     height: 17px;
 }
 
-
 .productBundleTotalPrice {
     padding-top: 13px;
     text-align: right;
@@ -395,21 +327,17 @@ div.productCountAndPrice {
 td.productBundleTotalPrice .productPrice .amount {
     font-size: 14px;
     font-weight: bold;
-    
 }
 
 td.productBundleTotalPrice .productPrice .unit {
     font-size: 11px;
     vertical-align: middle;
-    
 }
 
 .productCount .amount {
     font-size: 14px;
     font-weight: 600;
     font-family: Barlow;
-    
-    
 }
 
 .productCount .unit {
@@ -437,22 +365,19 @@ td.productBundleTotalPrice .productPrice .unit {
     vertical-align: middle;
 }
 
-
 .productPrice span:not(.amount) {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.5px;
-    
 }
 
 .productCountAndPrice .productPrice .amount {
     font-family: Barlow;
     font-weight: bold;
-    color :rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 
 .productPrice span {
-    
     color: rgb(155, 155, 155);
 }
 
@@ -462,6 +387,8 @@ td.productBundleTotalPrice .productPrice .unit {
     font-family: Barlow;
 }
 
+/*--------------------*/
+/* tfoot */
 tfoot {
     display: table-footer-group;
     vertical-align: middle;
@@ -478,16 +405,22 @@ tfoot td {
     padding-top: 13px;
     text-align: right;
 }
+.payProductTable tfoot tr.productTotal {
+    padding-top: 13px;
+    text-align: right;
+}
 
 .bothSideInfoWrap {
     margin-top: 80px;
-    width: 100%;
     position: relative;
-    z-index: 1;  
+    z-index: 1;
+    max-width: 964px;
+    min-width: 964px;
+    display: flex;
+    gap: 40px;
 }
 
 .payOrderInfoSection {
-    width: calc(100% - 348px);
 }
 
 .payOrderInfo {
@@ -527,12 +460,12 @@ tfoot td {
     line-height: 53px;
 }
 
-.payOrderEditBtn span{
+.payOrderEditBtn span {
     display: inline-block;
     vertical-align: middle;
 }
 
-.payOrderEditBtn img{
+.payOrderEditBtn img {
     display: inline-block;
     vertical-align: middle;
     width: 16px;
@@ -543,6 +476,9 @@ tfoot td {
     font-size: 14px;
 }
 
+.empty {
+    color: rgb(254, 79, 0);
+}
 .buyerInfo .buyerName {
     margin-bottom: 16px;
     font-weight: bold;
@@ -560,8 +496,9 @@ tfoot td {
 .payOrderInfo .buyerEmail {
     line-height: 17px;
     font-family: Barlow;
-}
+    font-size: 14px;
 
+}
 .deliveryMain .recipient {
     margin-bottom: 16px;
     font-weight: bold;
@@ -595,7 +532,7 @@ tfoot td {
     border: 1px solid rgb(225, 225, 225);
     position: relative;
     padding: 11px 15px 11px;
-    height: 20-px;
+    height: 20px;
 }
 
 .dropDownSelect .dropDownSelectLabel {
@@ -618,14 +555,13 @@ tfoot td {
     height: 12px;
 }
 
-
 .messageDropDown > div.active dropDownOverBox {
     display: none;
     border: 1px solid rgb(0, 0, 0);
 }
 
-.registerAddress {    
-    margin-bottom: 32px;
+.registerAddress {
+    margin: 24px 0;
 }
 
 .dropDownList {
@@ -645,8 +581,6 @@ tfoot td {
     padding: 11px 15px 11px;
     height: 20px;
 }
-
-
 
 .dropDownSelectTitle .dropDownSelectLabel {
     display: inline-block;
@@ -677,9 +611,6 @@ tfoot td {
     border-bottom: 1px solid rgb(247, 247, 247);
 }
 
-
-
-
 .registerAddressCheck {
     position: relative;
     display: inline-block;
@@ -702,19 +633,19 @@ tfoot td {
     padding: 0px;
 }
 
-.registerAddressCheck input + label{
+.registerAddressCheck input + label {
     display: inline-block;
     position: relative;
     cursor: pointer;
     user-select: none;
 }
 
-.registerAddressCheck input:checked + label::before{
+.registerAddressCheck input:checked + label::before {
     background-image: url(../../images/purchase/check_round_purple_icon.png);
     background-size: cover;
 }
 
-.registerAddressCheck input + label::before{
+.registerAddressCheck input + label::before {
     content: " ";
     display: inline-block;
     width: 20px;
@@ -727,7 +658,7 @@ tfoot td {
     background-size: cover;
 }
 
-.registerAddressCheck label span{
+.registerAddressCheck label span {
     font-size: 13px;
     letter-spacing: -0.5px;
     vertical-align: middle;
@@ -736,9 +667,9 @@ tfoot td {
 .applyPointInfo > label {
     display: inline-block;
     font-size: 13px;
-    font-weight: 500px;
+    font-weight: 500;
     letter-spacing: -0.5px;
-    pointer-events: none;  
+    pointer-events: none;
 }
 
 .applyPoint {
@@ -746,11 +677,9 @@ tfoot td {
     justify-content: space-between;
 }
 
-
 .applyPoint input {
     width: calc(100% - 11px);
 }
-
 
 .applyPointInfo div input {
     width: 100%;
@@ -766,8 +695,6 @@ tfoot td {
     color: rgb(0, 0, 0);
 }
 
-
-
 .applyPointInfo .add-on {
     top: 6px;
     right: 0px;
@@ -778,14 +705,13 @@ tfoot td {
     margin-top: 16px;
 }
 
-.totalHoldingPoint .text{
+.totalHoldingPoint .text {
     margin-right: 4px;
     font-size: 13px;
     letter-spacing: -0.5px;
 }
 
-
-.totalHoldingPoint .amount{
+.totalHoldingPoint .amount {
     font-size: 16px;
     font-weight: bold;
     color: rgb(98, 0, 240);
@@ -801,18 +727,18 @@ tfoot td {
     gap: 14px;
 }
 
-.payMethodGrid .buttonBox{ 
+.payMethodGrid .buttonBox {
     height: 94px;
     border-radius: 2px;
 }
 
-.payMethodGrid .buttonBox label { 
+.payMethodGrid .buttonBox label {
     display: flex;
     flex-direction: column;
     -webkit-box-align: center;
     align-items: center;
     position: relative;
-    
+
     width: 100%;
     height: 100%;
     color: rgb(155, 155, 155);
@@ -827,11 +753,11 @@ tfoot td {
     display: none;
 }
 
-.payMethodGrid .buttonBox label.checked{ 
+.payMethodGrid .buttonBox label.checked {
     border: 1px solid rgb(0, 0, 0);
 }
 
-.payMethodGrid .buttonBox label img{ 
+.payMethodGrid .buttonBox label img {
     width: 100%;
 }
 
@@ -859,8 +785,11 @@ tfoot td {
     line-height: 17px;
 }
 
-button, [type="button"], [type="reset"], [type="submit"] {
-    appearance: button;
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    appearance: menulist-button;
 }
 
 .payComment {
@@ -875,7 +804,6 @@ button, [type="button"], [type="reset"], [type="submit"] {
     -webkit-box-pack: justify;
     justify-content: space-between;
 }
-
 
 .payComment .infoText {
     display: flex;
@@ -897,30 +825,13 @@ button, [type="button"], [type="reset"], [type="submit"] {
 }
 
 .paySummaryInfo {
-    margin-left: 40px;
+    position: sticky;
     padding: 24px 32px;
     width: 250px;
     height: 388px;
-    position: absolute;
     right: 0px;
-    top: 0px;
+    top: 100px;
     border: 1px solid rgb(0, 0, 0);
-}
-
-.paySummaryInfo {
-    position: absolute;
-    top: 0px;
-    margin: 0px 0px 0px 40px;
-    
-    bottom: auto;
-}
-
-.paySummaryInfo.fixed {
-    position: fixed;
-    top: 104px;
-    margin: 0px;
-    left: 1100px;
-    bottom: auto;
 }
 
 .paySummaryTitle {
@@ -946,19 +857,18 @@ button, [type="button"], [type="reset"], [type="submit"] {
     margin-bottom: 12px;
 }
 
-.paySummaryDetail > div .label{
+.paySummaryDetail > div .label {
     font-size: 13px;
     letter-spacing: -0.5px;
 }
 
-.paySummaryInfo .amount{
+.paySummaryInfo .amount {
     float: right;
     font-family: Barlow;
     font-weight: 500;
 }
 
-
-.paySummaryDetail > div .amount{
+.paySummaryDetail > div .amount {
     font-size: 15px;
 }
 
@@ -967,13 +877,13 @@ button, [type="button"], [type="reset"], [type="submit"] {
     line-height: 29px;
 }
 
-.paySummaryPrice .label{
+.paySummaryPrice .label {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: -0.5px;
 }
 
-.paySummaryPrice .amount{
+.paySummaryPrice .amount {
     font-size: 24px;
     color: rgb(98, 0, 240);
     font-weight: bold;
@@ -983,17 +893,17 @@ button, [type="button"], [type="reset"], [type="submit"] {
     line-height: 22px;
 }
 
-.paySavingPoint .label{ 
+.paySavingPoint .label {
     font-size: 13px;
     letter-spacing: -0.5px;
     color: rgb(155, 155, 155);
 }
 
-.paySavingPoint .amount{ 
+.paySavingPoint .amount {
     font-size: 15px;
 }
 
-.borderLine {    
+.borderLine {
     width: calc(100% - 348px);
     margin-top: 24px;
     height: 1px;
@@ -1026,7 +936,8 @@ button, [type="button"], [type="reset"], [type="submit"] {
     border: 0px;
 }
 
-[type="checkbox"], [type="radio"] {
+[type="checkbox"],
+[type="radio"] {
     box-sizing: border-box;
     padding: 0px;
 }
@@ -1035,14 +946,14 @@ button, [type="button"], [type="reset"], [type="submit"] {
     width: max-content;
 }
 
-.agreeTermCheck input + label{
+.agreeTermCheck input + label {
     display: inline-block;
     position: relative;
     cursor: pointer;
     user-select: none;
 }
 
-.agreeTermCheck input + label::before{
+.agreeTermCheck input + label::before {
     content: " ";
     display: inline-block;
     width: 20px;
@@ -1055,13 +966,12 @@ button, [type="button"], [type="reset"], [type="submit"] {
     background-size: cover;
 }
 
-
 .agreeTermCheck input:checked + label::before {
     background-image: url(../../images/purchase/check_round_purple_icon.png);
     background-size: cover;
 }
 
-.agreeTermCheck label > span{
+.agreeTermCheck label > span {
     vertical-align: middle;
     font-size: 13px;
     letter-spacing: -0.5px;
@@ -1086,10 +996,9 @@ button, [type="button"], [type="reset"], [type="submit"] {
 }
 
 .paymentBtn {
+    width: 100%;
     margin-top: 40px;
-    width: calc(100% - 348px);
 }
-
 
 .paymentBtn button {
     width: 100%;
@@ -1097,8 +1006,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
     line-height: 48px;
     font-size: 15px;
     font-weight: 500;
-    letter-spacing: -0.5px
-   
+    letter-spacing: -0.5px;
 }
 
 .payment {
@@ -1116,5 +1024,226 @@ button, [type="button"], [type="reset"], [type="submit"] {
     width: 181px;
     line-height: 40px;
 }
+.paymentBtn .payment:disabled{
+    background-color: rgb(211, 211, 211);
+}
+
+
+/*----------------------------*/
+/*          modal             */
+.modalBoxWrap {
+    position: fixed;
+    inset: 0;
+    font-family: NotoSansCJKkr;
+    z-index: 100;
+}
+.modalBackGround {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+.modalBoxWrap .modalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    z-index: 102;
+}
+
+/* member info change modal */
+.infoChangeModal {
+    width: 418px;
+}
+.infoChangeModal .modalHeader {
+    margin: 20px 20px 24px 24px;
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+}
+.infoChangeModal .modalHeaderTitle{
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -0.3px;
+}
+
+.modalBox .modalHeader .modalCloseBtn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.infoChangeModal .modalBody{
+    margin: 8px 24px 40px;
+}
+.infoChangeModal .modalBody form > div:not(:last-child){
+    margin-bottom: 24px;
+}
+
+.relPosition label, .phoneRadio > label{
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: -0.5px;
+    pointer-events: none;
+}
+.relPosition > div {
+    position: relative;
+}
+
+.relPosition > div input{
+    width: 93%;
+    padding: 9px 24px 8px 0;
+    font-size: 13px;
+    line-height: 19px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image: initial;
+    border-bottom: 1px solid rgb(237, 237, 237);
+    outline: none;
+    background: transparent;
+    color: rgb(0, 0, 0);
+}
+.buyerName input {
+    font-family: NotoSansCJKkr;
+}
+.phoneSelectType .phoneRadio {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.phoneRadio > label {
+    margin-bottom: 12px;
+}
+.phoneRadio .radioBox {
+    height: 24px;
+}
+.phoneRadio .radioBox:last-child{
+    margin-top: 17px;
+}
+.phoneRadio .radioBox input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0px, 0px, 0px, 0px);
+    border: 0px;
+}
+.phoneRadio .radioBox input + label{
+    display: inline-block;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+.phoneRadio .radioBox input + label::before{
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin-right: 8px;
+    text-align: center;
+    vertical-align: top;
+    background-image: url(../../images/my/radio-btn-off.png);
+    background-size: contain;
+}
+.phoneRadio .radioBox input:checked + label::before {
+    background-image: url(../../images/my/radio-btn-on.png);
+}
+.phoneRadio .radioBox label > span {
+    display: inline-block;
+    margin-top: -1px;
+    vertical-align: text-top;
+    margin-left: 8px;
+    font-size: 13px;
+    letter-spacing: -0.5px;
+}
+.phoneRadio .radioBox label > span .oldCellPhone{
+    margin-left: 4px;
+    line-height: 16px;
+    font-weight: normal;
+    font-family: Barlow;
+}
+
+.phoneSelectType .newBuyerPhone {
+    margin-left: 32px;
+}
+.newBuyerPhone input{
+    font-family: Barlow;
+}
+.buyerEmail .buyerEmailLabel .labelSubText{
+    margin-left: 8px;
+    font-size: 11px;
+    letter-spacing: -0.5px;
+    color: rgb(155, 155, 155);
+    font-weight: normal;
+}
+.buyerEmail input{
+    font-family: Barlow;
+}
+.infoChangeModal .modalFooter {
+    padding: 0 24px 24px;
+}
+.goShopBtn {
+    border-radius: 2px;
+    outline: none;
+    border: 1px solid transparent;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    height: 40px;
+    width: 181px;
+    line-height: 40px;
+}
+.infoChangeBtn:disabled {
+    background-color: rgb(221, 221, 221);
+}
+.infoChangeBtn {
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+}
+
+.infoErrorMsg {
+    line-height: 17px;
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: -0.5px;
+    color: rgb(254, 79, 0);
+}
+.clearInputBtn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 6px;
+    right: 0px;
+    cursor: pointer;
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
 
 

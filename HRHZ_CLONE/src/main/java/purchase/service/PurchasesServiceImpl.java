@@ -15,8 +15,8 @@ public class PurchasesServiceImpl implements PurchaseService {
 	PurchaseDAO purchaseDAO;
 
 	@Override
-	public List<Map<String, Object>> getProductDetail(String productCode) {
-		return purchaseDAO.getProductDetail(productCode);
+	public List<Map<String, Object>> getProductDetail(Map<String, String> map) {
+		return purchaseDAO.getProductDetail(map);
 	}
 
 	@Override
@@ -32,5 +32,18 @@ public class PurchasesServiceImpl implements PurchaseService {
 	@Override
 	public void reviewUpload(ReviewDTO reviewDTO, List<String> fileNameList) {
 		purchaseDAO.reviewUpload(reviewDTO, fileNameList);
+	}
+
+	@Override
+	public String cartInsert(Map<String, Object> param) {
+		System.out.println(param);
+		return purchaseDAO.cartInsert(param);
+	}
+
+	@Override
+	public void cartDelete(Map<String, Object> param) {
+		
+		purchaseDAO.cartDelete(param);
+		
 	}
 }

@@ -47,3 +47,25 @@ $("header .searchModal .searchForm input").on("blur", function (event) {
         $(this).val("궁금한 주얼리를 검색해보세요!");
     }
 });
+
+// ---------------------------------------------------
+// 			session id null check
+// ---------------------------------------------------
+$('#myPageForm').on("click",function (){
+    if($('.memberId').val()){
+        location.assign("/myPage");
+    }else {
+        $.get("/loginModal", function (html){
+            $(html).appendTo('body')
+        })
+    }
+});
+$('.authMenu .cartBtn').on("click",function (){
+    if($('.memberId').val()){
+        location.assign("/purchase/cartForm");
+    }else {
+        $.get("/loginModal", function (html){
+            $(html).appendTo('body');
+        })
+    }
+});

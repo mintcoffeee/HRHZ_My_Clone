@@ -17,15 +17,19 @@ public class MainDAOMyBatis implements MainDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<Map<String, Object>> getBestProductList() throws Exception {
-		return sqlSession.selectList("mainSQL.getBestProductList");
+	public List<Map<String, Object>> getBestProductList(String memberId) throws Exception {
+		return sqlSession.selectList("mainSQL.getBestProductList", memberId);
 	}
 
 	@Override
-	public List<Map<String, Object>> getTop100Product() throws Exception {
-		return sqlSession.selectList("mainSQL.getTop100Product");
+	public List<Map<String, Object>> getTop100Product(String memberId) throws Exception {
+		return sqlSession.selectList("mainSQL.getTop100Product", memberId);
 	}
 
+	@Override
+	public List<Map<String, Object>> getRecentReview() throws Exception {
+		return sqlSession.selectList("mainSQL.getRecentReview");
+	}
 
 	@Override
 	public void likeCount(HashMap<String, String> dataMap) throws Exception {
@@ -36,9 +40,6 @@ public class MainDAOMyBatis implements MainDAO{
 		} else {
 			sqlSession.delete("mainSQL.likeDelete", dataMap);
 		}
-		
 		sqlSession.update("mainSQL.likeCount", dataMap);
-		
 	}
-
 }

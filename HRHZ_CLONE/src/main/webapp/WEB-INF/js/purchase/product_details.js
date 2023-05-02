@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    var productCode = $(".productCode").text();
-    var memberId = $(".memberId").text();
+    // remove GET parameters after uploading review
+    //  history.replaceState({}, null, location.pathname);
+
+    var productCode = $('.productCode').text();
+    var memberId = $('.memberId').val();
 
     // ---------------------------------------------------
     //                   smooth scroll
@@ -54,6 +57,9 @@ $(document).ready(function () {
 
             // review modal hiddenInput
             $(".hiddenInputs input[name='brandCode']").val(data[0].brandCode);
+
+            // remove arrow btns when it has only 1 thumbnail
+            imgChange();
         },
         error: function (err) {
             console.log(err);
@@ -65,10 +71,30 @@ $(document).ready(function () {
     // ---------------------------------------------------
     $.ajax({
         type: "post",
-        data: "productCode=" + productCode,
+        data: {
+            productCode: productCode,
+            memberId: memberId,
+        },
         url: "/purchase/getProductDetail",
         success: function (data) {
+            // check sessionId & change heart color
+            console.log(productCode);
+            console.log(memberId);
+            console.log(data[0].likeYN);
+
+            if (data[0].likeYN === "Y") {
+                $(".productLikeHeart").css("display", "none");
+                $(".productLikeHeartViolet").css("display", "block");
+            } else {
+                $(".productLikeHeart").css("display", "block");
+                $(".productLikeHeartViolet").css("display", "none");
+            }
+
             // text load
+            $(".storeInfoLink").attr(
+                "href",
+                "/brand/brandDetail?brandCode=" + data[0].brandCode + "&pg=1"
+            );
             $(".storeInfo > img").attr(
                 "src",
                 data[0].brandImgPath + "/" + data[0].brandImgName
@@ -77,6 +103,7 @@ $(document).ready(function () {
             $(".productLikeCnt").text(data[0].like);
             $(".productInfo .productName").text(data[0].productName);
             $(".productPriceSales > .amount").text(addComma(data[0].price));
+            $(".productPriceOriginAmount").text(addComma(data[0].price * 2));
             // 브랜드에서 알려드려요
             $(".storeNoticeContents > p").text(data[0].comment);
             if (data[0].comment == null) {
@@ -88,10 +115,14 @@ $(document).ready(function () {
             $(".dropdownOpenLabel").text(data[0].detailType);
 
             $.each(data, function (index, items) {
+                console.log(items.detailCode);
                 // add all option box HTML
                 let optionItem = $(
                     "<li class='selectedOptionItem'>" +
                         "<div class='optionBoxTop'>" +
+                        "<input type='hidden' name='detailCode' value='"+
+                        items.detailCode
+                        +"' />" +
                         "<div class='optionName'>" +
                         items.detailName +
                         "</div>" +
@@ -132,30 +163,19 @@ $(document).ready(function () {
         data: "productCode=" + productCode,
         url: "/purchase/getProductReviews",
         success: function (data) {
-            $(".productReviewMoreText span").text(data[0].reviewCount);
-            $(".productReviewTotalCnt").text("(" + data[0].reviewCount + ")");
+            console.log(data);
+            //$(".productReviewMoreText span").text(data[0].reviewCount);
+            //$(".productReviewTotalCnt").text("(" + data[0].reviewCount + ")");
             var reviewImg = "";
             var reviewSeq = data[0].seq;
+            var imgCnt = 1;
+            var reviewHTML;
+            var imgSeq_t = 0;
+            var reviewCnt = 0;
 
             $.each(data, function (index, items) {
-                console.log(reviewSeq);
-                console.log(items.seq);
-
-                if (reviewSeq == items.seq) {
-                    reviewImg =
-                        reviewImg +
-                        "<img src='/storage/review/" +
-                        items.imgName +
-                        "'/>";
-                    reviewSeq = items.seq;
-                } else {
-                    reviewImg =
-                        reviewImg +
-                        "<img src='/storage/review/" +
-                        items.imgName +
-                        "'/>";
-
-                    let reviewHTML =
+                if (!items.imgSeq) {
+                    reviewHTML =
                         "<a href='#'>" +
                         "<div class='productReviewItem'>" +
                         "<div class='reviewSeq'>" +
@@ -182,14 +202,63 @@ $(document).ready(function () {
                         "</div>" +
                         "<div class='reviewPhoto'>";
 
-                    reviewHTML = reviewHTML + reviewImg + "</div></div></a>";
-                    console.log(reviewImg);
+                    reviewHTML = reviewHTML + "</div></div></a>";
 
                     $(".productReviewList").append(reviewHTML);
-                    reviewImg = "";
-                    reviewSeq = items.seq;
-                } //else
+                    reviewHTML = "";
+                    reviewCnt++;
+                } else {
+                    if (items.imgCount + 1 > imgCnt) {
+                        reviewImg =
+                            reviewImg +
+                            "<img src='/storage/review/" +
+                            items.imgName +
+                            "'/>";
+                    }
+
+                    if (items.imgCount === imgCnt) {
+                        reviewHTML =
+                            "<a href='#'>" +
+                            "<div class='productReviewItem'>" +
+                            "<div class='reviewSeq'>" +
+                            items.seq +
+                            "</div>" +
+                            "<div class='reviewInfo'>" +
+                            "<div class='rate'>" +
+                            "<img src='../../images/purchase/product_review_star_on.png' alt='star icon' />".repeat(
+                                items.like
+                            ) +
+                            "</div>" +
+                            "<div class='accountAndDate'>" +
+                            "<span class='account'>" +
+                            items.memberId.substring(0, 4) +
+                            "**</span>" +
+                            "<span class='line'>|</span>" +
+                            "<span class='date'>" +
+                            items.regDate +
+                            "</span>" +
+                            "</div>" +
+                            "</div>" +
+                            "<div class='reviewContent'>" +
+                            items.content +
+                            "</div>" +
+                            "<div class='reviewPhoto'>";
+
+                        reviewHTML =
+                            reviewHTML + reviewImg + "</div></div></a>";
+                        $(".productReviewList").append(reviewHTML);
+                        reviewHTML = "";
+                        reviewImg = "";
+                        imgCnt = 1;
+                        reviewCnt++;
+                    }
+
+                    imgCnt++;
+                }
             }); //each
+            console.log(reviewCnt);
+            $(".productReviewMoreText span").text(reviewCnt);
+            $(".productReviewTotalCnt").text("(" + reviewCnt + ")");
         },
         error: function (err) {
             console.log(err);
@@ -250,7 +319,7 @@ $(document).ready(function () {
 
     function imgChange() {
         var img_left = (1 - img_position) * 550 + "px";
-        console.log(img_left);
+
         imgs.animate({
             left: img_left,
         });
@@ -276,13 +345,34 @@ $(document).ready(function () {
     // ---------------------------------------------------
     // like heart icon
     $(".productLikeHeart").on("click", function (event) {
+        likeCount(memberId, productCode, "I");
         $(".productLikeHeart").css("display", "none");
         $(".productLikeHeartViolet").css("display", "block");
     });
     $(".productLikeHeartViolet").on("click", function (event) {
+        likeCount(memberId, productCode, "D");
         $(".productLikeHeart").css("display", "block");
         $(".productLikeHeartViolet").css("display", "none");
     });
+
+    function likeCount(id, code, division) {
+        $.ajax({
+            type: "post",
+            url: "/likeCount",
+            data: {
+                id: id,
+                code: code,
+                codeType: code.charAt(0),
+                division: division,
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            err: function (err) {
+                console.log(err);
+            },
+        });
+    }
 
     // ---------------------------------------------------
     //                      options
@@ -401,41 +491,89 @@ $(document).ready(function () {
     //                  add cart button
     // ---------------------------------------------------
     $(".addCartBtn").on("click", function (event) {
-        location.href = "/purchase/cartForm";
-    });
+        if(memberId) {
+            let optionList = [];
+            let option = "";
+            let optionCountSum = 0;
 
+            if (memberId.length < 1) {
+                $("section.modalBackGround").css("display", "flex");
+                return;
+            }
+
+            // listing quantity of all options
+            $(".selectedOptionItem").each(function () {
+                let detailCode = $(this).find('input[name="detailCode"]').val();
+                let optionCount = parseInt($(this).find(".count").text());
+
+                if (optionCount > 0) {
+                    option = {optionCode: detailCode, productCount: optionCount};
+                    optionList.push(option);
+                }
+
+                optionCountSum += optionCount;
+
+            });
+            console.log(optionList);
+            console.log(optionCountSum);
+
+            if (optionCountSum == 0) {
+
+                alert("선택된 옵션이 없습니다.");
+                return;
+
+            } else {
+                cartData(optionList);
+            }
+        } else {
+            $.get("/loginModal", function (html){
+                $(html).appendTo('body');
+            })
+        }
+      
+    });
     // ---------------------------------------------------
     //                   buy now button
     // ---------------------------------------------------
     $(".purchase").on("click", function (event) {
-        let optionCountList = [];
-        let optionCountSum = 0;
+        if(memberId){
+            $(".buyNowForm").empty();
+            let optionList = [];
+            let option = "";
+            let optionCountSum = 0;
 
-        // listing quantity of all options
-        $(".selectedOptionItem").each(function () {
-            let optionCount = parseInt(
-                $(this).find(".count").text().replace(",", "")
-            );
-            optionCountList.push(optionCount);
-            optionCountSum += optionCount;
-        });
+            // listing quantity of all options
+            $(".selectedOptionItem").each(function () {
+                let detailCode = $(this).find('input[name="detailCode"]').val();
+                let optionCount = parseInt($(this).find(".count").text());
+                option = {optionCode: detailCode , productCount:optionCount};
 
-        // put data into addCartForm
-        const productCodeInput = $("<input>")
-            .attr("name", "productCode")
-            .val($(".productCode").text());
-        const optionCountInput = $("<input>")
-            .attr("name", "optionCountList")
-            .val(JSON.stringify(optionCountList));
-        $(".buyNowForm").append(productCodeInput).append(optionCountInput);
+                optionList.push(option);
+                optionCountSum += optionCount;
+            });
 
-        if (optionCountSum == 0) {
-            alert("선택된 옵션이 없습니다.");
-        } else {
-            // send productCode & quantity list
-            $(".buyNowForm").submit();
+            let jsonList = JSON.stringify(optionList);
+
+            // put data into addCartForm
+            const jsonInput = $("<input>")
+                .attr("name", "jsonList")
+                .val(jsonList)
+                .attr("hidden",true);
+            $(".buyNowForm").attr("action", "/purchase/payment").append(jsonInput);
+
+            if (optionCountSum == 0) {
+                alert("선택된 옵션이 없습니다.");
+            } else {
+                // send productCode & quantity list
+                $(".buyNowForm").submit();
+            }
+        }else {
+            $.get("/loginModal", function (html){
+                $(html).appendTo('body');
+            })
         }
     });
+
 
     // ---------------------------------------------------
     //                   store notice
@@ -591,4 +729,42 @@ $(document).ready(function () {
         // 등록버튼 초기화
         $(".reviewWriteBtn").css("background-color", "#ddd");
     });
+    
+    
+    
+   function cartData(optionList) {
+    
+	    $.ajax({
+	        type: "post",
+	        url: "/purchase/cartInsert",
+	        data: {
+	            id : memberId,
+	            optionList : JSON.stringify(optionList)
+	        },
+	        success: function (data) {
+	         	$("section.cartModalBackGround").css("display", "flex");
+	        },
+	        err: function (err) {
+	            console.log(err);
+	        },
+	    });
+	}
+	
+
+
+    $(".cartCancleModalBtn").on("click", function (event) {
+        $("section.cartModalBackGround").css("display", "none");
+    });
+	
+   
+    $(".cartConfirmModalBtn").on("click", function (event) {
+
+        location.href="/purchase/cartForm";
+    });
+    
 });
+
+
+
+
+    

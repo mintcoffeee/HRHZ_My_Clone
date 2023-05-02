@@ -8,8 +8,11 @@
     <select id="getMember" parameterType="String" resultType="member">
         select * from member where phone=#{phone}
     </select>
-    
-    
+
+
+
+
+<!--    -->
     <insert id="memberInsert" parameterType="java.util.HashMap" >
         INSERT INTO member 
         VALUES ( 
@@ -18,8 +21,8 @@
 	        ,	'${phone}'
 	        ,	'${password}'
 	        ,	null
-	        ,	null
-	        ,	null
+	        ,	'${gender}'
+	        ,	'${memberDate}'
 	        ,	'${joinPath}'
 	        ,	'N'
 	        ,	null
@@ -29,6 +32,9 @@
 	        ,  	'${emailAlarm}'
 	     )
     </insert>
+
+
+<!--    -->
     
      <select id="loginCheck" parameterType="java.util.HashMap" resultType="String">
         SELECT id as "ID" 
@@ -37,5 +43,13 @@
         AND email = #{email}
         AND password = #{password}
     </select>
+    
+    <select id="snsLoginCheck" parameterType="String" resultType="String">
+        SELECT id as "id" 
+        FROM member 
+        WHERE 1=1 
+        AND email = #{email}
+    </select>
+
 
 </mapper>

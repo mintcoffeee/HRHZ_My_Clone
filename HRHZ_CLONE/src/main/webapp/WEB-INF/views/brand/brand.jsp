@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
     <head>
         <title></title>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8" >
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/favicon48.ico" />
         <link rel="stylesheet" href="../../css/common/reset.css" />
         <link rel="stylesheet" href="../../css/common/header_footer.css" />
+        <link rel="stylesheet" href="../../css/common/loginModal.css" />
         <link rel="stylesheet" href="../../css/brand/brand_style.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
@@ -20,17 +22,20 @@ pageEncoding="UTF-8"%>
     </head>
     <body>
         <%@ include file="/WEB-INF/views/common/header.jsp" %>
-        <!-- brand main -->
+
         <main>
+            <div class="hiddenData">
+                <input hidden="hidden" class="memberId" value="${sessionId}" />
+            </div>
             <section class="adHeader">
                 <article class="adFirstAticle">
                     <div class="adTitleText">세일 중인 브랜드</div>
                     <ul class="topSection">
                         <li class="adTitleImg01">
-                            <a href="#">
+                            <a href="/brand/brandDetail?brandCode=B000014&pg=1">
                                 <img
-                                    alt="스쿠도"
-                                    src="../images/brand/scoodo.jpeg"
+                                    alt="파티 애프터 다크"
+                                    src="../../images/brand/partyafter.jpeg"
                                     class="topImg"
                                 />
                                 <div class="adBrandTextOnImg">
@@ -48,7 +53,7 @@ pageEncoding="UTF-8"%>
                                             d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
                                         />
                                     </svg>
-                                    <span>스쿠도</span>
+                                    <span>파티 애프터 다크</span>
                                 </div>
                                 <div class="brandHoverContent">
                                     <div class="arrowImgSection">
@@ -65,10 +70,10 @@ pageEncoding="UTF-8"%>
                             </a>
                         </li>
                         <li class="adTitleImg01">
-                            <a href="#">
+                            <a href="/brand/brandDetail?brandCode=B000008&pg=1">
                                 <img
-                                    alt="레끌라"
-                                    src="../images/brand/LECLAT.jpeg"
+                                    alt="마마카사르"
+                                    src="../../images/brand/ma.jpeg"
                                     class="topImg"
                                 />
                                 <div class="adBrandTextOnImg">
@@ -86,14 +91,14 @@ pageEncoding="UTF-8"%>
                                             d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
                                         />
                                     </svg>
-                                    <span>레끌라</span>
+                                    <span>마마카사르</span>
                                 </div>
                                 <div class="brandHoverContent">
                                     <div class="arrowImgSection">
                                         <img
                                             class="arrowImg"
                                             alt
-                                            src="../images/brand/arrow.png"
+                                            src="../../images/brand/ma.jpeg"
                                         />
                                         <p>브랜드 바로가기</p>
                                     </div>
@@ -101,10 +106,10 @@ pageEncoding="UTF-8"%>
                             </a>
                         </li>
                         <li class="adTitleImg01">
-                            <a href="#">
+                            <a href="/brand/brandDetail?brandCode=B000020&pg=1">
                                 <img
-                                    alt="타티아나"
-                                    src="../images/brand/tatiana.jpeg"
+                                    alt="마즈"
+                                    src="../../images/brand/maz.jpeg"
                                     class="topImg"
                                 />
                                 <div class="adBrandTextOnImg">
@@ -122,7 +127,7 @@ pageEncoding="UTF-8"%>
                                             d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
                                         />
                                     </svg>
-                                    <span>타티아나</span>
+                                    <span>마즈</span>
                                 </div>
                                 <div class="brandHoverContent">
                                     <div class="arrowImgSection">
@@ -137,7 +142,7 @@ pageEncoding="UTF-8"%>
                             </a>
                         </li>
                         <li class="adTitleImg01">
-                            <a href="#">
+                            <a href="/brand/brandDetail?brandCode=B000002&pg=1">
                                 <img
                                     alt="딥브로우"
                                     src="../images/brand/deepbrow.jpeg"
@@ -213,14 +218,13 @@ pageEncoding="UTF-8"%>
                 </article>
             </section>
         </main>
-
         <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
         <script
             type="text/javascript"
             src="http://code.jquery.com/jquery-3.6.4.min.js"
         ></script>
         <script type="text/javascript" src="../../js/header_footer.js"></script>
+        <script type="text/javascript" src="../../js/loginModal.js"></script>
         <script type="text/javascript" src="../../js/brand/brand.js"></script>
     </body>
 </html>

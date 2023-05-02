@@ -2,16 +2,17 @@
 //			send authentication number
 // ---------------------------------------------------
 $('button.certification').on('click', function (){
-    
     $.ajax({
         type: 'post',
         url: '/signUp/sendSMS',
         data: 'phone='+$('#phone').val(),
         success: function (data){
             if (data === 'exist'){
+				$('.authenticationBtn').attr("disabled",true);
                 alert("이미 가입된 번호입니다.");
             } else {
-                $('#authenticationNumber').removeAttr('disabled'); //authentication number input text remove disabled
+				$('.authenticationBtn').attr("disabled",true);
+                $('#authenticationNumber').removeAttr('disabled').focus(); //authentication number input text remove disabled
                 $('.checkNumber').val(data); //random number save
             }
         },
@@ -41,7 +42,8 @@ $('#authenticationNumber').on('keyup', function () {
 $('#phone').on('keyup', function () {
 	
 	if ($(this).val().length === 11) {
-    	$('.certification').removeAttr('disabled');
+		if(!$('.phoneError').text().length)
+    		$('.certification').removeAttr('disabled');
 	} else {
 		$('.certification').attr('disabled', true);
 	}
@@ -58,15 +60,15 @@ $('#phone').on('input', function () {
 	if (phone === "") {
 		$('.phoneError').text('휴대폰 번호를 입력해 주세요.').show();
 		$(this).addClass('error');
-		$('.certification').css('background-color', '#dddddd');
+		$('.certification').attr('disabled', true);
 	} else if (!phonerule.test(phone)) {
 		$('.phoneError').text('휴대폰 번호가 올바르지 않습니다.').show();
 		$(this).addClass('error');
-		$('.certification').css('background-color', '#dddddd');
+		$('.certification').attr('disabled', true);
 	} else {
 		$('.phoneError').hide();
 		$(this).removeClass('error');
-		$('.certification').css('background-color', '#000000');
+		$('.certification').removeAttr('disabled');
 	}
 	
 });
@@ -115,7 +117,7 @@ function goPost(){
     obj.setAttribute('type', 'hidden');
     obj.setAttribute('name', 'phone');
     obj.setAttribute('value', $('#phone').val());
-    
+
     form.setAttribute('method', 'post');
     form.setAttribute('action', '/signUp2');
 

@@ -927,6 +927,9 @@ h3.userCheckHead {
 .modalBoxWrap .pwdModal .modalFooter{
   margin: 0 24px 24px;
 }
+.modalBoxWrap .pwdModal a {
+  width: 100%;
+}
 .modalBoxWrap .pwdModal .modalFooter button {
   width: 100%;
   height: 40px;

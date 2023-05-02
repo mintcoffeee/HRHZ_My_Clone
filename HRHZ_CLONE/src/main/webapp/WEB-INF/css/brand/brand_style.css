@@ -12,6 +12,9 @@ main {
     max-width: 1000px;
     margin: 0 auto;
 }
+.hiddenData {
+    display: none;
+}
 
 /*brand top*/
 .adHeader {
@@ -26,13 +29,26 @@ main {
     margin: 50px 12px 20px;
     font-weight: 700;
 }
+.adTitleImg01 {
+    display: flex;
+    list-style: none;
+    height: 250px;
+}
+.adTitleImg01:hover {
+    opacity: 0.7;
+}
+.topImg {
+    width: 250px;
+    height: 250px;
+}
 .adBrandTextOnImg {
     position: relative;
     bottom: 30px;
-    left: 65px;
     font-family: "Barlow";
     color: #fff;
-    margin-left: 10px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }
 .earthImg {
     width: 17px;
@@ -56,18 +72,6 @@ main {
     height: 15px;
     margin-left: 50px;
 }
-.adTitleImg01 {
-    display: flex;
-    list-style: none;
-    height: 250px;
-}
-.adTitleImg01:hover {
-    opacity: 0.7;
-}
-.topImg {
-    width: 250px;
-    height: 250px;
-}
 
 /* bottom section */
 .scMenuArea {
@@ -82,6 +86,9 @@ main {
     justify-content: space-between;
     height: 150px;
     width: 100%;
+}
+.brandCode {
+    display: none;
 }
 a.brandLink {
     display: flex;
@@ -108,9 +115,7 @@ a.brandLink {
     color: #a3a3a3;
     font-size: 13px;
 }
-
 .brandLikeBtn {
-    border: none;
     cursor: pointer;
 }
 .likeBlank {
@@ -120,5 +125,4 @@ a.brandLink {
 .likeFull {
     height: 15px;
     width: 16px;
-    display: none;
 }

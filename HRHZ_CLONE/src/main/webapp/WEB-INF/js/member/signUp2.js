@@ -42,8 +42,8 @@ $('.inputCheck').click(function () {
 });
 	
 // [필수] 3개랑 [선택] 누를 경우 모두 동의 체크박스 체크됨.
-$("#ageAgree, #privacyAgree, #serviceAgree").click(function() {
-	
+$("#ageAgree, #privacyAgree, #serviceAgree").change(function() {
+	toggleSubmitButton();
 	allCheck();
 	
 });

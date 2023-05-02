@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
         <title>productDetail</title>
         <link rel="stylesheet" href="../../css/common/reset.css" />
         <link rel="stylesheet" href="../../css/common/header_footer.css" />
+        <link rel="stylesheet" href="../../css/common/loginModal.css" />
         <link rel="stylesheet" href="../../css/purchase/product_details.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
@@ -22,11 +23,9 @@ pageEncoding="UTF-8"%>
 
     <body>
         <%@ include file="/WEB-INF/views/common/header.jsp" %>
-        <!-- <div class="productCode">${productCode}</div> -->
-        <!-- <div class="memberId">${memberId}</div> -->
         <div class="sessionData">
-            <div class="productCode">P00000072</div>
-            <div class="memberId">moon</div>
+            <div class="productCode">${param.productCode}</div>
+            <input hidden="hidden" class="memberId" value="${sessionId}" />
         </div>
 
         <div class="background">
@@ -153,7 +152,7 @@ pageEncoding="UTF-8"%>
                     <div class="productInfoSection">
                         <div class="productInfo">
                             <div class="badge">
-                                <a href="#">
+                                <a class="storeInfoLink" href="">
                                     <div class="storeInfo">
                                         <img
                                             src=""
@@ -219,8 +218,7 @@ pageEncoding="UTF-8"%>
                                 </div>
                                 <div class="productReviewMoreText">
                                     <a href="#productReviewSection"
-                                        ><span>reviewCount</span>개의 후기
-                                        보러가기</a
+                                        ><span>0</span>개의 후기 보러가기</a
                                     >
                                     <img
                                         src="../../images/purchase/arrow_right_btn.png"
@@ -232,15 +230,13 @@ pageEncoding="UTF-8"%>
                             <div class="productPrice">
                                 <span
                                     class="productPriceDiscountPercentUnitAmount"
-                                    >27%</span
+                                    >50%</span
                                 >
                                 <div class="productPriceSales">
                                     <span class="amount">price</span>
                                     <span class="unit">원</span>
                                 </div>
-                                <span class="productPriceOriginAmount"
-                                    >68,000</span
-                                >
+                                <span class="productPriceOriginAmount">0</span>
                             </div>
                             <div class="availableBenefit">
                                 <div class="greatestBenefitList"></div>
@@ -311,7 +307,6 @@ pageEncoding="UTF-8"%>
                                 <form
                                     class="buyNowForm"
                                     method="post"
-                                    action="/purchase/payment"
                                 ></form>
                             </div>
                         </div>
@@ -358,9 +353,7 @@ pageEncoding="UTF-8"%>
                                 <span class="productDetailSectionTitle"
                                     >상품 구매후기</span
                                 >
-                                <span class="productReviewTotalCnt"
-                                    >(reviewCount)</span
-                                >
+                                <span class="productReviewTotalCnt">(0)</span>
                             </div>
                             <div class="reviewBtnArea">
                                 <div class="reviewBtnDescribe">
@@ -729,7 +722,8 @@ pageEncoding="UTF-8"%>
                 </form>
             </div>
         </section>
-
+        
+ 		<%@ include file="productDetailCartModal.jsp" %>
         <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
         <script
@@ -741,5 +735,6 @@ pageEncoding="UTF-8"%>
             type="text/javascript"
             src="../../js/purchase/product_details.js"
         ></script>
+        <script type="text/javascript" src="../../js/loginModal.js"></script>
     </body>
 </html>

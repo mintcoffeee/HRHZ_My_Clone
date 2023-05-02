@@ -17,7 +17,6 @@
     <div class="backGround">
     
       <div class="wrapper">
-      
           <div class="signUpContainer">
           
               

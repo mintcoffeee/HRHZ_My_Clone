@@ -1,26 +1,25 @@
 * {
     font-family: "Noto Sans KR", sans-serif;
 }
-section.sectionBackGround {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+
+.modalBackGround {
     display: none;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    inset: 0px;
+    font-family: NotoSansCJKkr;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100;
 }
 
-.modalBox {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   background-color: rgb(255, 255, 255);
-   border-radius: 2px;
-   z-index: 102;
+.modalBackGround .modalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    z-index: 102;
+    width: 330px;
 }
 
 .modalBox .modalCloseBtn {
@@ -85,3 +84,4 @@ section.sectionBackGround {
     top: 4px;
     right: 4px;
 }
+

@@ -2,9 +2,7 @@
 <div class="modalBoxWrap">
     <div class="modalBox deleteModal">
         <div class="modalHeader">
-            <a href="#close-modal" rel="modal:close" class="close-modal ">
-                <img class="modalCloseBtn" src="../../images/my/modal_close_btn.png">
-            </a>
+            <img class="modalCloseBtn" src="../../images/my/modal_close_btn.png">
         </div>
         <div class="modalBody">
             <div class="modalContents">
@@ -17,9 +15,7 @@
             </div>
         </div>
         <div class="modalFooter">
-            <a href="#close-modal" rel="modal:close" class="close-modal ">
-                <button class="whiteBtn">취소</button>
-            </a>
+            <button class="cancelModalBtn">취소</button>
             <button class="goShopBtn">확인</button>
         </div>
     </div>

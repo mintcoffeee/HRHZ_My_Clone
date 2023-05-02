@@ -1,14 +1,22 @@
 package my.service;
 
+import hrhz.dto.AES256;
 import hrhz.dto.MemberDTO;
 import my.dao.MyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+@PropertySource("classpath:hrhz/conf/login.properties")
 @Service
 public class MyServiceImpl implements MyService{
     @Autowired
     private MyDAO myDAO;
+    @Autowired
+    private AES256 aes256;
+    @Value("${aes256.key}")
+    private String key;
 
     @Override
     public MemberDTO getMemberInfo(String id) {
@@ -17,14 +25,33 @@ public class MyServiceImpl implements MyService{
 
     @Override
     public String getMember(String id, String password) {
-        MemberDTO memberDTO = myDAO.getMember(id, password);
+        String encodingPwd = "";
+        //password encode
+        try {
+            aes256.setAlg(key);
+
+            encodingPwd =  aes256.encrypt(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        MemberDTO memberDTO = myDAO.getMember(id, encodingPwd);
         if(memberDTO == null) return "";
         else return "true";
     }
 
     @Override
     public void updateNewPwd(String id, String checkPassword) {
-        myDAO.updateNewPwd(id, checkPassword);
+        String encodingNewPwd = "";
+        //password encode
+        try {
+            aes256.setAlg(key);
+
+            encodingNewPwd =  aes256.encrypt(checkPassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        myDAO.updateNewPwd(id, encodingNewPwd);
     }
 
     @Override

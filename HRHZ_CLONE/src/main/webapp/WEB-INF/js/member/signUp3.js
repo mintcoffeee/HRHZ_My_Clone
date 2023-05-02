@@ -40,27 +40,51 @@ $('.passwordCheck').on('input', function(){
  	
 
 $('.nextButton').on('click', function() {
-	var smsAlarm =( $('input[name=smsAlarm]').val() ) === 'on' ? 'Y' : 'N';
-	var emailAlarm = ($('input[name=emailAlarm]').val()) === 'on' ? 'Y' : 'N';
-     	
+	let smsAlarm =( $('input[name=smsAlarm]').val() ) === 'on' ? 'Y' : 'N';
+	let emailAlarm = ($('input[name=emailAlarm]').val()) === 'on' ? 'Y' : 'N';
+    let email = "";
+    let password = "";
+    let joinPath = "";
+
+    let $sessionEmail = $('#sessionEmail').val();
+    if($sessionEmail) {
+        email = $sessionEmail;
+        joinPath = $sessionEmail.indexOf("gmail") !== -1 ? "G" :
+                        $sessionEmail.indexOf("naver") !== -1 ? "N" : "K";
+    } else {
+        email = $('#email').val();
+        password = $('#password').val();
+        joinPath = "A";
+    }
+    console.log(email);
+    console.log(joinPath);
+    console.log($('#gender_0').is(':checked'));
+
+    let memberDate = $('input[name="date"]').val();
+    console.log(memberDate);
+    let gender = $('#gender_0').is(':checked') ? "F" : "M";
+    console.log(gender);
+
    $.ajax({
        type: 'post',
        url: '/memberInsert',
        data: {
-       		'email' : $('#email').val(),
-       		'password' : $('#password').val(),
+       		'email' : email,
+       		'password' : password,
        		'phone' : $('input[name=phone]').val(),
        		'smsAlarm' : smsAlarm,
        		'emailAlarm' : emailAlarm,
-       		'joinPath' : 'A'
+       		'joinPath' : joinPath,
+            'memberDate' : memberDate,
+            'gender' : gender,
        },
        success: function (data){
           alert("회원가입을 축하합니다.");
           location.href='/signIn';
           $('.bestContents').append(optionItem);
        },
-       error: function (err){ 
-       	console.log(err); 
+       error: function (err){
+       	console.log(err);
        }
    });
    
@@ -93,12 +117,8 @@ $('.email, .password, .passwordCheck').on('input', function () {
 
     if($('.emailValidIcon').is(':visible') && $('.passwordValidIcon').is(':visible') && $('.passwordValidIcon1').is(':visible')){
         $('.nextButton').prop('disabled', false);
-        $('.nextButton').css('background-color', '#000000');
-        
     } else {
         $('.nextButton').prop('disabled', true);
-        $('.nextButton').css('background-color', '#DDDDDD');
-    	
     }
 });
     
@@ -145,6 +165,24 @@ function updatePasswordCheckValidation() {
         
     }
 }
+
+/* ----------------------- */
+$(function () {
+    // if email session value is exit, next Button didn't disabled
+    if($('input[name="email"]').val() !== "") $('.nextButton').prop('disabled', false);
+
+    // date picker
+    $('.datepicker .datepickerBtn').flatpickr({
+        dateFormat: "Y.m.d",
+        locale: "ko",
+        defaultDate: "1990-01-01",
+        onChange: function (selectedDates, dateStr, instance) {
+            $(".datepickerBtn .placeholder").val(dateStr);
+        }
+    });
+});
+
+
  
    
     

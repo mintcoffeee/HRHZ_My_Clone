@@ -154,19 +154,18 @@
                         <label for="userGenderW">여자</label>
                         <input type="radio" name="gender" id="userGenderM" class="genderInput" value="M" />
                         <label for="userGenderM">남자</label>
-                    </input>
+                    </div>
                     <div class="btnWrap">
                       <button type="button" class="goShopBtn submitBtn" disabled>
                         수정
                       </button>
                     </div>
-                  </div>
                 </div>
-                <div class="userInfoFormArea">
-                  <div class="formRight">
-                    <div class="userRemove">
-                      <button type="button">회원탈퇴</button>
-                    </div>
+              </div>
+              <div class="userInfoFormArea">
+                <div class="formRight">
+                  <div class="userRemove">
+                    <button type="button">회원탈퇴</button>
                   </div>
                 </div>
               </div>
